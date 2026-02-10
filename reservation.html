@@ -81,6 +81,30 @@ document.getElementById("formReservation").addEventListener("submit", function(e
 });
 </script>
 
+    <script>
+function calculerMontant() {
+    let prix = parseInt(document.getElementById("chambre").value);
+    let arrivee = new Date(document.getElementById("arrivee").value);
+    let depart = new Date(document.getElementById("depart").value);
+
+    if (arrivee && depart && depart > arrivee) {
+        let difference = depart - arrivee;
+        let jours = difference / (1000 * 3600 * 24);
+
+        document.getElementById("jours").value = jours;
+
+        let total = jours * prix;
+        document.getElementById("total").innerText = total;
+    }
+}
+
+document.getElementById("chambre").addEventListener("change", calculerMontant);
+document.getElementById("arrivee").addEventListener("change", calculerMontant);
+document.getElementById("depart").addEventListener("change", calculerMontant);
+</script>
+
+
 </body>
 </html>
+
 
