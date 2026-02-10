@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Réservation</title>
-<link rel="stylesheet" href="style.css">
+    <title>Réservation - Congo Palace</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
-<a href="index.html">Accueil</a>
-<a href="chambres.html">Chambres</a>
-<a href="reservation.html">Réservation</a>
-<a href="contact.html">Contact</a>
-<a href="apropos.html">A propos</a>
+    <a href="index.html">Accueil</a>
+    <a href="chambres.html">Chambres</a>
+    <a href="reservation.html">Réservation</a>
+    <a href="contact.html">Contact</a>
+    <a href="apropos.html">A propos</a>
 </nav>
 
 <div class="container">
-<form id="formRes">
+    <h2>Réservation de chambre</h2>
 
-<h2>Identité</h2>
-<input type="text" id="nom" placeholder="Nom complet" required>
-<input type="text" id="tel" placeholder="Téléphone" required>
-<input type="text" id="em" placeholder="email" required>
+    <form id="formReservation">
 
-<h2>Dates</h2>
-<input type="date" id="arrivee">
-<input type="date" id="depart">
+        <input type="text" id="nom" placeholder="Nom complet" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="tel" placeholder="Téléphone" required>
 
-<p>Jours: <span id="jours">0</span></p>
-<p>Total: <span id="total">0</span> $</p>
+        <label>Date d'arrivée</label>
+        <input type="date" id="arrivee" required>
 
-<button type="submit">Valider</button>
+        <label>Date de sortie</label>
+        <input type="date" id="sortie" required>
 
-</form>
+        <label>Choisir la chambre</label>
+        <select id="chambre" required>
+            <option value="">--Choisir--</option>
+            <option value="50">Chambre Simple - 50$</option>
+            <option value="80">Chambre Standard - 80$</option>
+            <option value="120">Chambre VIP - 120$</option>
+        </select>
+
+        <h3 id="jours">Nombre de jours : 0</h3>
+        <h3 id="total">Total à payer : 0 $</h3>
+
+        <label>Moyen de paiement</label>
+        <select required>
+            <option>Mobile Money</option>
+            <option>Airtel Money</option>
+            <option>M-Pesa</option>
+        </select>
+
+        <button type="submit">Valider la réservation</button>
+    </form>
 </div>
 
 <script>
-window.onload=function(){
-let a=document.getElementById("arrivee");
-let d=document.getElementById("depart");
+function calculer() {
+    let arrivee = new Date(document.getElementById("arrivee").value);
+    let sortie = new Date(document.getElementById("sortie").value);
+    let prix = parseInt(document.getElementById("chambre").value);
 
-function calc(){
-let da=new Date(a.value);
-let dd=new Date(d.value);
-let diff=(dd-da)/(1000*60*60*24);
-if(diff>0){
-document.getElementById("jours").innerText=diff;
-document.getElementById("total").innerText=diff*50;
-}
-}
-a.onchange=calc;
-d.onchange=calc;
+    if (arrivee && sortie && prix) {
+        let diff = sortie - arrivee;
+        let jours = diff / (1000 * 60 * 60 * 24);
 
-document.getElementById("formRes").onsubmit=function(e){
-e.preventDefault();
-alert("Réservation confirmée !");
-this.reset();
-document.getElementById("jours").innerText=0;
-document.getElementById("total").innerText=0;
-};
+        if (jours > 0) {
+            document.getElementById("jours").innerText = "Nombre de jours : " + jours;
+            document.getElementById("total").innerText = "Total à payer : " + (jours * prix) + " $";
+        }
+    }
 }
+
+document.getElementById("arrivee").addEventListener("change", calculer);
+document.getElementById("sortie").addEventListener("change", calculer);
+document.getElementById("chambre").addEventListener("change", calculer);
+
+document.getElementById("formReservation").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Réservation envoyée !");
+    this.reset();
+    document.getElementById("jours").innerText = "Nombre de jours : 0";
+    document.getElementById("total").innerText = "Total à payer : 0 $";
+});
 </script>
 
 </body>
