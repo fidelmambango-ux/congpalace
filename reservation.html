@@ -1,100 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Réservation - Congo Palace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-    <a href="index.html">Accueil</a>
-    <a href="chambres.html">Chambres</a>
-    <a href="reservation.html">Réservation</a>
-    <a href="contact.html">Contact</a>
-    <a href="apropos.html">A propos</a>
-</nav>
+<h1>Réservation de chambre</h1>
 
-<div class="container">
-    <h2>Réservation de chambre</h2>
+<form>
 
-    <form id="formReservation">
+    <label>Nom complet</label>
+    <input type="text" required>
 
-        <input type="text" id="nom" placeholder="Nom complet" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="tel" id="tel" placeholder="Téléphone" required>
+    <label>Email</label>
+    <input type="email" required>
 
-   <select id="chambre">
-    <option value="50">Chambre Simple - 50$</option>
-    <option value="80">Chambre Standard - 80$</option>
-    <option value="120">Chambre VIP - 120$</option>
-</select>
+    <label>Téléphone</label>
+    <input type="text" required>
 
-<input type="date" id="arrivee">
-<input type="date" id="depart">
+    <label>Choisir la chambre</label>
+    <select id="chambre">
+        <option value="50">Chambre Simple - 50$</option>
+        <option value="80">Chambre Standard - 80$</option>
+        <option value="120">Chambre VIP - 120$</option>
+    </select>
 
-<input type="text" id="jours" placeholder="Nombre de jours" readonly>
+    <label>Date d'arrivée</label>
+    <input type="date" id="arrivee">
 
-<h2>Total à payer : <span id="total">0</span> $</h2>
+    <label>Date de départ</label>
+    <input type="date" id="depart">
 
+    <label>Nombre de jours</label>
+    <input type="text" id="jours" readonly>
 
-        <h3 id="jours">Nombre de jours : 0</h3>
-        <h3 id="total">Total à payer : 0 $</h3>
+    <h2>Total à payer : <span id="total">0</span> $</h2>
 
-        <label>Moyen de paiement</label>
-        <select required>
-            <option>Mobile Money</option>
-            <option>Airtel Money</option>
-            <option>M-Pesa</option>
-        </select>
+    <label>Moyen de paiement</label>
+    <select>
+        <option>M-Pesa</option>
+        <option>Airtel Money</option>
+        <option>Orange Money</option>
+    </select>
 
-        <button type="submit">Valider la réservation</button>
-    </form>
-</div>
+    <br><br>
+    <button type="reset">Valider la réservation</button>
+
+</form>
 
 <script>
-function calculer() {
-    let arrivee = new Date(document.getElementById("arrivee").value);
-    let sortie = new Date(document.getElementById("sortie").value);
-    let prix = parseInt(document.getElementById("chambre").value);
-
-    if (arrivee && sortie && prix) {
-        let diff = sortie - arrivee;
-        let jours = diff / (1000 * 60 * 60 * 24);
-
-        if (jours > 0) {
-            document.getElementById("jours").innerText = "Nombre de jours : " + jours;
-            document.getElementById("total").innerText = "Total à payer : " + (jours * prix) + " $";
-        }
-    }
-}
-
-document.getElementById("arrivee").addEventListener("change", calculer);
-document.getElementById("sortie").addEventListener("change", calculer);
-document.getElementById("chambre").addEventListener("change", calculer);
-
-document.getElementById("formReservation").addEventListener("submit", function(e){
-    e.preventDefault();
-    alert("Réservation envoyée !");
-    this.reset();
-    document.getElementById("jours").innerText = "Nombre de jours : 0";
-    document.getElementById("total").innerText = "Total à payer : 0 $";
-});
-</script>
-
-    <script>
 function calculerMontant() {
     let prix = parseInt(document.getElementById("chambre").value);
     let arrivee = new Date(document.getElementById("arrivee").value);
     let depart = new Date(document.getElementById("depart").value);
 
-    if (arrivee && depart && depart > arrivee) {
-        let difference = depart - arrivee;
-        let jours = difference / (1000 * 3600 * 24);
+    if (!isNaN(arrivee) && !isNaN(depart) && depart > arrivee) {
+        let diff = depart - arrivee;
+        let jours = diff / (1000 * 3600 * 24);
 
         document.getElementById("jours").value = jours;
-
-        let total = jours * prix;
-        document.getElementById("total").innerText = total;
+        document.getElementById("total").innerText = jours * prix;
     }
 }
 
@@ -103,8 +70,5 @@ document.getElementById("arrivee").addEventListener("change", calculerMontant);
 document.getElementById("depart").addEventListener("change", calculerMontant);
 </script>
 
-
 </body>
 </html>
-
-
