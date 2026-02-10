@@ -4,6 +4,7 @@ body{
     padding:0;
     background:#0b2c4d;
     color:white;
+     text-align:center;
 }
 
 nav{
@@ -29,16 +30,17 @@ nav a{
 }
 
 input, select{
-    width:100%;
+    width:90%;
     padding:10px;
     margin:10px 0;
 }
 
 button{
-    width:100%;
+    width:90%;
     padding:12px;
     background:gold;
     border:none;
     font-weight:bold;
     cursor:pointer;
 }
+
