@@ -1,12 +1,23 @@
+
+/* ===== IMAGE DE FOND POUR TOUTES LES PAGES ===== */
+
 body{
-        background:red;
-    font-family: Arial, sans-serif;
-    margin:0;
-    padding:0;
-    background:#0b2c4d;
-    color:white;
-     text-align:center;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: url("../congo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
 }
+
+
+.page{
+    background: rgba(0,0,0,0.7);
+    min-height: 100vh;
+    padding: 40px;
+}
+
 
 nav{
     background:red;
@@ -143,6 +154,7 @@ h1{
     text-align: center;
     margin-bottom: 30px;
 }
+
 
 
 
