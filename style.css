@@ -1,5 +1,6 @@
 
 body{
+    background-color:bleu;
     background: url("../congo.jpg") center/cover no-repeat;
     min-height:100vh;
     color:white;
@@ -272,6 +273,7 @@ nav a:hover{
     0% { transform: translateY(100px); opacity:0; }
     100% { transform: translateY(0); opacity:1; }
 }
+
 
 
 
